@@ -1,0 +1,40 @@
+.container {
+  padding: 0 2rem;
+}
+
+.wrapper {
+  min-height: 100vh;
+  padding: 4rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+table {
+  th,
+  td {
+    padding: 0.8rem;
+  }
+
+  th {
+    // position: sticky;
+    // top: 16px;
+    background: #db504a;
+    color: #e8e8e8;
+
+    &:first-of-type {
+      border-top-left-radius: 8px;
+    }
+    &:last-of-type {
+      border-top-right-radius: 8px;
+    }
+  }
+
+  td {
+    background-color: rgb(241, 241, 241);
+    font-size: 1.5rem;
+    font-family: "Noto Serif SC", serif;
+  }
+}
