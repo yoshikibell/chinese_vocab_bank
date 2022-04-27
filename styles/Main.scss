@@ -39,7 +39,6 @@
 
 table {
   margin: 0 auto;
-  border-spacing: 0;
   border-style: solid;
   border-color: $light-gray;
 
@@ -79,6 +78,10 @@ table {
     background-color: $dark-gray;
     font-size: 1.5rem;
     font-family: "Noto Serif SC", serif;
+
+    &.is-hidden {
+      color: $dark-gray;
+    }
   }
 
   input[type="checkbox"] {

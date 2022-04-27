@@ -30,11 +30,16 @@ export default function Home({ res, deviceType }) {
   });
 
   const ghostHandler = (e) => {
-    const col = e.currentTarget;
-    const checkbox = col.querySelector("input[type='checkbox']");
-    col.classList.toggle("is-checked");
-    if (e.target == col) {
+    const colHeader = e.currentTarget;
+    const checkbox = colHeader.querySelector("input[type='checkbox']");
+    colHeader.classList.toggle("is-checked");
+    if (e.target == colHeader) {
       checkbox.checked = !checkbox.checked;
+    }
+
+    const columns = document.getElementsByClassName(colHeader.id);
+    for (let i = 0; i < columns.length; i++) {
+      columns[i].classList.toggle("is-hidden");
     }
   };
 
@@ -55,7 +60,7 @@ export default function Home({ res, deviceType }) {
               <tr className="column-locks">
                 {indexAttrs.map((attr, index) => {
                   return (
-                    <th key={index} id={attr.toLowerCase()} onClick={(e) => ghostHandler(e)}>
+                    <th key={index} id={`col_${index}`} onClick={(e) => ghostHandler(e)}>
                       <input type="checkbox" name={attr.toLowerCase()} />
                     </th>
                   );
