@@ -2,7 +2,9 @@ import Head from "next/head";
 import { google } from "googleapis";
 import Item from "../components/Item";
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const UA = context.req.headers["user-agent"];
+  const isMobile = Boolean(UA.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i));
   const auth = await google.auth.getClient({ scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"] });
   const sheets = google.sheets({ version: "v4", auth });
   const ranges = "Sheet1!A2:E";
@@ -15,16 +17,26 @@ export async function getServerSideProps() {
   return {
     props: {
       res,
+      deviceType: isMobile ? "mobile" : "desktop",
     },
   };
 }
 
-export default function Home({ res }) {
+export default function Home({ res, deviceType }) {
   const indexAttrs = ["ID", "Simplified", "Traditional", "Pinyin", "Definition"];
   let rowData;
   res.forEach((data) => {
     rowData = data.values;
   });
+
+  const ghostHandler = (e) => {
+    const col = e.currentTarget;
+    const checkbox = col.querySelector("input[type='checkbox']");
+    col.classList.toggle("is-checked");
+    if (e.target == col) {
+      checkbox.checked = !checkbox.checked;
+    }
+  };
 
   return (
     <div className="container">
@@ -33,11 +45,23 @@ export default function Home({ res }) {
         <meta name="description" content="chinese study tool" />
       </Head>
 
-      <main className="wrapper">
+      <main className={`wrapper ${deviceType == "mobile" ? "mobile" : "desktop"}`}>
+        <div className="title-heading">
+          <h1>中文单词银行</h1>
+        </div>
         <div className="table__container">
           <table>
             <thead>
-              <tr>
+              <tr className="column-locks">
+                {indexAttrs.map((attr, index) => {
+                  return (
+                    <th key={index} id={attr.toLowerCase()} onClick={(e) => ghostHandler(e)}>
+                      <input type="checkbox" name={attr.toLowerCase()} />
+                    </th>
+                  );
+                })}
+              </tr>
+              <tr className="index-attributes">
                 {indexAttrs.map((attr, index) => {
                   return <th key={index}>{attr}</th>;
                 })}
