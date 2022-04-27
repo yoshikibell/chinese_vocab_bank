@@ -82,6 +82,9 @@ table {
     &.is-hidden {
       color: $dark-gray;
     }
+    &.is-visible {
+      color: inherit;
+    }
   }
 
   input[type="checkbox"] {
@@ -89,4 +92,20 @@ table {
     accent-color: $accent-color;
     transform: scale(1.5);
   }
+}
+
+.unlock-btn {
+  height: 80px;
+  width: 160px;
+  border-radius: 4px 0 0 4px;
+  background-color: $accent-color;
+  position: fixed;
+  bottom: 160px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $light-gray;
+  font-size: 2rem;
+  user-select: none;
 }

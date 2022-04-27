@@ -43,6 +43,13 @@ export default function Home({ res, deviceType }) {
     }
   };
 
+  const unLockGhostHandler = (e) => {
+    const tableData = document.querySelectorAll("td");
+    for (let i = 0; i < tableData.length; i++) {
+      tableData[i].classList.toggle("is-visible");
+    }
+  };
+
   return (
     <div className="container">
       <Head>
@@ -78,6 +85,9 @@ export default function Home({ res, deviceType }) {
               })}
             </tbody>
           </table>
+        </div>
+        <div className="unlock-btn" id="unlock" onClick={(e) => unLockGhostHandler(e)}>
+          view
         </div>
       </main>
     </div>
