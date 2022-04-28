@@ -45,8 +45,15 @@ export default function Home({ res, deviceType }) {
 
   const unLockGhostHandler = (e) => {
     const tableData = document.querySelectorAll("td");
-    for (let i = 0; i < tableData.length; i++) {
-      tableData[i].classList.toggle("is-visible");
+
+    if (e.type == "pointerdown") {
+      for (let i = 0; i < tableData.length; i++) {
+        tableData[i].classList.toggle("is-visible");
+      }
+    } else {
+      for (let i = 0; i < tableData.length; i++) {
+        tableData[i].classList.toggle("is-visible");
+      }
     }
   };
 
@@ -86,7 +93,7 @@ export default function Home({ res, deviceType }) {
             </tbody>
           </table>
         </div>
-        <div className="unlock-btn" id="unlock" onClick={(e) => unLockGhostHandler(e)}>
+        <div className="unlock-btn" id="unlock" onPointerDown={(e) => unLockGhostHandler(e)} onPointerUp={(e) => unLockGhostHandler(e)}>
           view
         </div>
       </main>
