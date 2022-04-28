@@ -1,5 +1,5 @@
 .wrapper {
-  margin: 5rem auto;
+  margin: 6rem auto;
 
   &.mobile {
     .title-heading {
@@ -79,11 +79,15 @@ table {
     font-size: 1.5rem;
     font-family: "Noto Serif SC", serif;
 
-    &.is-hidden {
-      color: $dark-gray;
+    &.is-locked {
+      color: transparent;
+      background: repeating-linear-gradient(45deg, $light-gray, $dark-gray 8px);
     }
     &.is-visible {
-      color: inherit;
+      color: inherit !important;
+      &::after {
+        content: none;
+      }
     }
   }
 
@@ -95,12 +99,15 @@ table {
 }
 
 .unlock-btn {
-  height: 80px;
-  width: 160px;
+  height: 100px;
+  width: 100%;
   border-radius: 4px 0 0 4px;
+  border: 4px solid $light-gray;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
   background-color: $accent-color;
   position: fixed;
-  bottom: 160px;
+  bottom: 0;
   right: 0;
   display: flex;
   align-items: center;
@@ -108,4 +115,14 @@ table {
   color: $light-gray;
   font-size: 2rem;
   user-select: none;
+  z-index: 1000;
+  &::before {
+    content: "";
+    display: block;
+    height: 40px;
+    width: 100%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 100%);
+    position: absolute;
+    top: -40px;
+  }
 }

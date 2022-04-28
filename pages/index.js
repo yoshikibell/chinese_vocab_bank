@@ -39,21 +39,14 @@ export default function Home({ res, deviceType }) {
 
     const columns = document.getElementsByClassName(colHeader.id);
     for (let i = 0; i < columns.length; i++) {
-      columns[i].classList.toggle("is-hidden");
+      columns[i].classList.toggle("is-locked");
     }
   };
 
   const unLockGhostHandler = (e) => {
     const tableData = document.querySelectorAll("td");
-
-    if (e.type == "pointerdown") {
-      for (let i = 0; i < tableData.length; i++) {
-        tableData[i].classList.toggle("is-visible");
-      }
-    } else {
-      for (let i = 0; i < tableData.length; i++) {
-        tableData[i].classList.toggle("is-visible");
-      }
+    for (let i = 0; i < tableData.length; i++) {
+      tableData[i].classList.toggle("is-visible");
     }
   };
 
@@ -75,7 +68,7 @@ export default function Home({ res, deviceType }) {
                 {indexAttrs.map((attr, index) => {
                   return (
                     <th key={index} id={`col_${index}`} onClick={(e) => ghostHandler(e)}>
-                      <input type="checkbox" name={attr.toLowerCase()} />
+                      {index != 0 && <input type="checkbox" name={attr.toLowerCase()} />}
                     </th>
                   );
                 })}
@@ -94,7 +87,7 @@ export default function Home({ res, deviceType }) {
           </table>
         </div>
         <div className="unlock-btn" id="unlock" onPointerDown={(e) => unLockGhostHandler(e)} onPointerUp={(e) => unLockGhostHandler(e)}>
-          view
+          ✨ magic ✨
         </div>
       </main>
     </div>

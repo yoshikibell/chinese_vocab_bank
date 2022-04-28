@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+SC&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Noto+Serif+SC&family=Roboto:wght@300;400&display=swap");
 
 $base-color: #f6fff8;
 $primary-color: #a4c3b2;
@@ -11,8 +12,9 @@ body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Roboto", sans-serif;
   background-color: $base-color;
+  min-width: 640px;
 }
 
 a {
