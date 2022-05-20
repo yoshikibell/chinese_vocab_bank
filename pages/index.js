@@ -45,6 +45,10 @@ export default function Home({ res, deviceType }) {
   };
 
   const unLockGhostHandler = (e) => {
+    const BLACKLIST = ["TH", "INPUT"];
+    if (BLACKLIST.includes(e.target.tagName)) {
+      return;
+    }
     const tableData = document.querySelectorAll("td");
     for (let i = 0; i < tableData.length; i++) {
       tableData[i].classList.toggle("is-visible");
@@ -71,7 +75,7 @@ export default function Home({ res, deviceType }) {
   }, [savedChars]);
 
   return (
-    <div className="container">
+    <div className="container" onPointerDown={(e) => unLockGhostHandler(e)} onPointerUp={(e) => unLockGhostHandler(e)}>
       <Head>
         <title>zhongwen word bank</title>
         <meta name="description" content="chinese study tool" />
@@ -105,9 +109,6 @@ export default function Home({ res, deviceType }) {
               })}
             </tbody>
           </table>
-        </div>
-        <div className="unlock-btn" id="unlock" onPointerDown={(e) => unLockGhostHandler(e)} onPointerUp={(e) => unLockGhostHandler(e)}>
-          ✨ magic ✨
         </div>
       </main>
     </div>
