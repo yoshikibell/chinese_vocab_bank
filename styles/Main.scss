@@ -91,10 +91,12 @@ table {
     background-color: $dark-gray;
     font-size: 1.5rem;
     font-family: "Noto Serif SC", serif;
+    user-select: none;
 
     &.is-locked {
       color: transparent;
       background: repeating-linear-gradient(45deg, $light-gray, $dark-gray 8px);
+      user-select: none;
     }
     &.is-visible {
       color: inherit !important;
@@ -108,5 +110,34 @@ table {
     color: white;
     accent-color: $accent-color;
     transform: scale(1.5);
+  }
+}
+
+.unlock-btn {
+  height: 100px;
+  width: 100%;
+  border-radius: 4px 0 0 4px;
+  border: 4px solid $light-gray;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  background-color: $accent-color;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $light-gray;
+  font-size: 2rem;
+  user-select: none;
+  z-index: 1000;
+  &::before {
+    content: "";
+    display: block;
+    height: 40px;
+    width: 100%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 100%);
+    position: absolute;
+    top: -40px;
   }
 }

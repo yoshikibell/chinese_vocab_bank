@@ -45,13 +45,17 @@ export default function Home({ res, deviceType }) {
   };
 
   const unLockGhostHandler = (e) => {
-    const BLACKLIST = ["TH", "INPUT"];
-    if (BLACKLIST.includes(e.target.tagName)) {
-      return;
-    }
     const tableData = document.querySelectorAll("td");
-    for (let i = 0; i < tableData.length; i++) {
-      tableData[i].classList.toggle("is-visible");
+    if (e.type == "pointerdown" && e.target.id == "unlock") {
+      for (let i = 0; i < tableData.length; i++) {
+        tableData[i].classList.add("is-visible");
+      }
+    }
+
+    if (e.type == "pointerup") {
+      for (let i = 0; i < tableData.length; i++) {
+        tableData[i].classList.remove("is-visible");
+      }
     }
   };
 
@@ -109,6 +113,9 @@ export default function Home({ res, deviceType }) {
               })}
             </tbody>
           </table>
+        </div>
+        <div className="unlock-btn" id="unlock">
+          reveal
         </div>
       </main>
     </div>
