@@ -74,6 +74,15 @@ table {
     }
   }
 
+  tr {
+    &.is-highlighted {
+      background: #d9fc7f;
+      td {
+        background: transparent;
+      }
+    }
+  }
+
   td {
     background-color: $dark-gray;
     font-size: 1.5rem;

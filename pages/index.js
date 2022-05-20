@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { google } from "googleapis";
 import Item from "../components/Item";
+import { useEffect, useState } from "react";
 
 export async function getServerSideProps(context) {
   const UA = context.req.headers["user-agent"];
@@ -50,6 +51,25 @@ export default function Home({ res, deviceType }) {
     }
   };
 
+  useEffect(() => {
+    loadSavedChars();
+  }, []);
+
+  const [savedChars, setSavedChars] = useState([]);
+  const loadSavedChars = () => {
+    if (localStorage.getItem("savedChars") === null) {
+      localStorage.setItem("savedChars", JSON.stringify([]));
+    } else {
+      let loadedChars = JSON.parse(localStorage.getItem("savedChars"));
+      setSavedChars(loadedChars);
+    }
+  };
+
+  useEffect(() => {
+    localStorage.setItem("savedChars", JSON.stringify(savedChars));
+    return () => {};
+  }, [savedChars]);
+
   return (
     <div className="container">
       <Head>
@@ -80,8 +100,8 @@ export default function Home({ res, deviceType }) {
               </tr>
             </thead>
             <tbody>
-              {rowData.map((attr) => {
-                return <Item key={attr[0]} data={attr} />;
+              {rowData.map((attr, index) => {
+                return <Item key={attr[0]} data={attr} savedChars={savedChars} setSavedChars={setSavedChars} />;
               })}
             </tbody>
           </table>
